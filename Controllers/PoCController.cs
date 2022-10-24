@@ -26,5 +26,11 @@ namespace poc.Controllers
             
             return Ok(response);
         }
+
+        [HttpGet("/healthCheck", Name = "HealthCheck")]
+        public ActionResult healthCheck()
+        {
+            return Content("Application is UP!");
+        }
     }
 }
