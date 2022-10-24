@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bvyrz1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bvyrz1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
   <bpmn:collaboration id="Collaboration_16tsung">
-    <bpmn:participant id="Participant_0n6ydnf" name="Licensing process" processRef="Process_0bpv0l6" />
+    <bpmn:participant id="Participant_0n6ydnf" name="Licensing process" processRef="licensing-process" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0bpv0l6" isExecutable="true">
+  <bpmn:process id="licensing-process" name="Licensing process" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0pd7knm">
       <bpmn:lane id="Lane_07l8c9y" name="CLIENT">
-        <bpmn:flowNodeRef>Activity_0nvinhm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>select_license</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0vfza0d" name="DISPATCHER">
-        <bpmn:flowNodeRef>Activity_1ypzhi8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>assign_request</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1icrzwh" name="SUPPORT">
-        <bpmn:flowNodeRef>Activity_0l8jb86</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>validate_request</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_17v9u2l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0l9xv6f</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0ry91pd</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_12jznb0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>final_accept</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>final_reject</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_082sns6</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1vaou4z" name="DEPARTMENT">
-        <bpmn:flowNodeRef>Activity_0qzaejm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>department_process</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1un700a</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:userTask id="Activity_0nvinhm" name="Select license, fill form, upload docs">
+    <bpmn:userTask id="select_license" name="Select license, fill form, upload docs">
       <bpmn:incoming>Flow_1qnvixl</bpmn:incoming>
       <bpmn:incoming>Flow_0vz0va1</bpmn:incoming>
       <bpmn:incoming>Flow_11odm90</bpmn:incoming>
@@ -33,13 +33,13 @@
     </bpmn:userTask>
     <bpmn:startEvent id="StartEvent_1" name="Client new request">
       <bpmn:outgoing>Flow_1qnvixl</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0elpsyc" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0elpsyc" messageRef="Message_1umz1sv" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1ypzhi8" name="Assign request to support team">
+    <bpmn:userTask id="assign_request" name="Assign request to support team">
       <bpmn:incoming>Flow_13ahdxs</bpmn:incoming>
       <bpmn:outgoing>Flow_1yfjltx</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0l8jb86" name="Validate request">
+    <bpmn:userTask id="validate_request" name="Validate request">
       <bpmn:incoming>Flow_1yfjltx</bpmn:incoming>
       <bpmn:outgoing>Flow_12dzzut</bpmn:outgoing>
     </bpmn:userTask>
@@ -52,7 +52,7 @@
     <bpmn:endEvent id="Event_0l9xv6f" name="Reject the request">
       <bpmn:incoming>Flow_11ccd3q</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_0qzaejm" name="Further process the request">
+    <bpmn:userTask id="department_process" name="Further process the request">
       <bpmn:incoming>Flow_008yai4</bpmn:incoming>
       <bpmn:outgoing>Flow_0u1dzaw</bpmn:outgoing>
     </bpmn:userTask>
@@ -62,11 +62,11 @@
       <bpmn:outgoing>Flow_1xzbku2</bpmn:outgoing>
       <bpmn:outgoing>Flow_1gcwmzr</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0ry91pd" name="Final acceptance">
+    <bpmn:userTask id="final_accept" name="Final acceptance">
       <bpmn:incoming>Flow_1gcwmzr</bpmn:incoming>
       <bpmn:outgoing>Flow_1ehxm60</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_12jznb0" name="Final rejection">
+    <bpmn:userTask id="final_reject" name="Final rejection">
       <bpmn:incoming>Flow_1xzbku2</bpmn:incoming>
       <bpmn:outgoing>Flow_0zefxh9</bpmn:outgoing>
     </bpmn:userTask>
@@ -74,20 +74,33 @@
       <bpmn:incoming>Flow_0zefxh9</bpmn:incoming>
       <bpmn:incoming>Flow_1ehxm60</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1qnvixl" sourceRef="StartEvent_1" targetRef="Activity_0nvinhm" />
-    <bpmn:sequenceFlow id="Flow_13ahdxs" sourceRef="Activity_0nvinhm" targetRef="Activity_1ypzhi8" />
-    <bpmn:sequenceFlow id="Flow_12dzzut" sourceRef="Activity_0l8jb86" targetRef="Gateway_17v9u2l" />
-    <bpmn:sequenceFlow id="Flow_1yfjltx" sourceRef="Activity_1ypzhi8" targetRef="Activity_0l8jb86" />
-    <bpmn:sequenceFlow id="Flow_0vz0va1" name="Ask for more information from the client" sourceRef="Gateway_17v9u2l" targetRef="Activity_0nvinhm" />
-    <bpmn:sequenceFlow id="Flow_11ccd3q" sourceRef="Gateway_17v9u2l" targetRef="Event_0l9xv6f" />
-    <bpmn:sequenceFlow id="Flow_008yai4" name="Accept" sourceRef="Gateway_17v9u2l" targetRef="Activity_0qzaejm" />
-    <bpmn:sequenceFlow id="Flow_0u1dzaw" sourceRef="Activity_0qzaejm" targetRef="Gateway_1un700a" />
-    <bpmn:sequenceFlow id="Flow_11odm90" name="Ask for more information from the client" sourceRef="Gateway_1un700a" targetRef="Activity_0nvinhm" />
-    <bpmn:sequenceFlow id="Flow_1xzbku2" name="Reject" sourceRef="Gateway_1un700a" targetRef="Activity_12jznb0" />
-    <bpmn:sequenceFlow id="Flow_1gcwmzr" name="Accept" sourceRef="Gateway_1un700a" targetRef="Activity_0ry91pd" />
-    <bpmn:sequenceFlow id="Flow_0zefxh9" sourceRef="Activity_12jznb0" targetRef="Event_082sns6" />
-    <bpmn:sequenceFlow id="Flow_1ehxm60" sourceRef="Activity_0ry91pd" targetRef="Event_082sns6" />
+    <bpmn:sequenceFlow id="Flow_1qnvixl" sourceRef="StartEvent_1" targetRef="select_license" />
+    <bpmn:sequenceFlow id="Flow_13ahdxs" sourceRef="select_license" targetRef="assign_request" />
+    <bpmn:sequenceFlow id="Flow_12dzzut" sourceRef="validate_request" targetRef="Gateway_17v9u2l" />
+    <bpmn:sequenceFlow id="Flow_1yfjltx" sourceRef="assign_request" targetRef="validate_request" />
+    <bpmn:sequenceFlow id="Flow_0vz0va1" name="Ask for more information from the client" sourceRef="Gateway_17v9u2l" targetRef="select_license">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${moreDetails}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_11ccd3q" sourceRef="Gateway_17v9u2l" targetRef="Event_0l9xv6f">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${rejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_008yai4" name="Accept" sourceRef="Gateway_17v9u2l" targetRef="department_process">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accepted}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0u1dzaw" sourceRef="department_process" targetRef="Gateway_1un700a" />
+    <bpmn:sequenceFlow id="Flow_11odm90" name="Ask for more information from the client" sourceRef="Gateway_1un700a" targetRef="select_license">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${moreDetails}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1xzbku2" name="Reject" sourceRef="Gateway_1un700a" targetRef="final_reject">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${rejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1gcwmzr" name="Accept" sourceRef="Gateway_1un700a" targetRef="final_accept">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accepted}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0zefxh9" sourceRef="final_reject" targetRef="Event_082sns6" />
+    <bpmn:sequenceFlow id="Flow_1ehxm60" sourceRef="final_accept" targetRef="Event_082sns6" />
   </bpmn:process>
+  <bpmn:message id="Message_1umz1sv" name="start" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_16tsung">
       <bpmndi:BPMNShape id="Participant_0n6ydnf_di" bpmnElement="Participant_0n6ydnf" isHorizontal="true">
@@ -184,7 +197,7 @@
         <di:waypoint x="1341" y="600" />
         <di:waypoint x="1462" y="600" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1vruv5f_di" bpmnElement="Activity_0nvinhm">
+      <bpmndi:BPMNShape id="Activity_1vruv5f_di" bpmnElement="select_license">
         <dc:Bounds x="330" y="110" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_04wehff_di" bpmnElement="StartEvent_1">
@@ -193,10 +206,10 @@
           <dc:Bounds x="224" y="175" width="53" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_156ylvc_di" bpmnElement="Activity_1ypzhi8">
+      <bpmndi:BPMNShape id="Activity_156ylvc_di" bpmnElement="assign_request">
         <dc:Bounds x="330" y="320" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0nwqduf_di" bpmnElement="Activity_0l8jb86">
+      <bpmndi:BPMNShape id="Activity_0nwqduf_di" bpmnElement="validate_request">
         <dc:Bounds x="330" y="540" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_17v9u2l_di" bpmnElement="Gateway_17v9u2l" isMarkerVisible="true">
@@ -208,16 +221,16 @@
           <dc:Bounds x="515" y="636" width="50" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ooxm36_di" bpmnElement="Activity_0qzaejm">
+      <bpmndi:BPMNShape id="Activity_0ooxm36_di" bpmnElement="department_process">
         <dc:Bounds x="650" y="790" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1un700a_di" bpmnElement="Gateway_1un700a" isMarkerVisible="true">
         <dc:Bounds x="865" y="805" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ke9n5t_di" bpmnElement="Activity_0ry91pd">
+      <bpmndi:BPMNShape id="Activity_1ke9n5t_di" bpmnElement="final_accept">
         <dc:Bounds x="1130" y="480" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_12jznb0_di" bpmnElement="Activity_12jznb0">
+      <bpmndi:BPMNShape id="Activity_12jznb0_di" bpmnElement="final_reject">
         <dc:Bounds x="1130" y="620" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_082sns6_di" bpmnElement="Event_082sns6">

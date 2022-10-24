@@ -23,6 +23,8 @@ namespace poc.Services
         {
             List<ExternalTaskInfo> allTasks = await _camundaClient.ExternalTasks.Query().List();
 
+            Task<List<Camunda.Api.Client.UserTask.UserTaskInfo>> userTasks = _camundaClient.UserTasks.Query().List();
+
             _logger.LogInformation(allTasks.ToString());
 
             return new ProcessStateDto()
