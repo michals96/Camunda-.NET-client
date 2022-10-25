@@ -4,8 +4,6 @@ import {AxiosMethodEnum} from "./config/axios.types";
 
 export const postCamundaEngine = async (url: string, data: any): Promise<AxiosResponse<any>> => {
     return await callApi({
-        url: url,
-        method: AxiosMethodEnum.POST,
-        data
+        url: url, method: AxiosMethodEnum.POST, data
     })
 }

@@ -1,9 +1,5 @@
 export enum AxiosMethodEnum {
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    GET = 'GET',
-    PATCH = 'PATCH',
+    POST = 'POST', PUT = 'PUT', DELETE = 'DELETE', GET = 'GET', PATCH = 'PATCH',
 }
 
 export enum HttpStatusCode {
