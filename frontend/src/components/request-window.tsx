@@ -2,6 +2,8 @@ import {Box, Button, TextareaAutosize, TextField} from "@mui/material";
 import React, {useState} from "react";
 import {postCamundaEngine} from "../services/post-camunda.engine";
 
+import styles from "./request-window.module.scss";
+
 const RequestWindow = (): JSX.Element => {
     const [url, setUrl] = useState<string>('');
     const [body, setBody] = useState<any>();
@@ -21,6 +23,7 @@ const RequestWindow = (): JSX.Element => {
             }}
             noValidate
             autoComplete="off"
+            className={styles.container}
         >
             <TextField size="medium" label="Camunda REST Api URL" id="url_input" onChange={handleUrlChange}/>
             <TextareaAutosize
