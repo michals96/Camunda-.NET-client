@@ -4,12 +4,14 @@ namespace poc
 {
     public class CamundaService : IHostedService
     {
+        //public CamundaEngineClient(Uri restUrl, string userName, string password)
+        public static string CAMUNDA_URL = "http://host.docker.internal:8080/engine-rest/engine/default/";
 
         private readonly CamundaEngineClient camunda;
 
         public CamundaService()
         {
-            camunda = new CamundaEngineClient();
+            camunda = new CamundaEngineClient(new Uri(CAMUNDA_URL), "demo", "demo");
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

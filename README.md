@@ -1,3 +1,14 @@
+# HOW TO RUN
+
+1. Run `docker-compose up -d`
+2. Start browser in *NO-CORS* mode
+
+* gchrome on windows it is `chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security`
+* gchrome onlinux it is `google-chrome --disable-web-security`
+
+3. Go to `localhost:300`
+
+
 # REQUESTS
 
 1. Start process
