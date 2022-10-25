@@ -31,10 +31,6 @@ namespace poc.Services
         {
             List<ExternalTaskInfo> allTasks = await _camundaClient.ExternalTasks.Query().List();
 
-            // Task<List<Camunda.Api.Client.UserTask.UserTaskInfo>> userTasks = _camundaClient.UserTasks.Query().List();
-
-            // _camundaClient.UserTasks["select_license"].
-
             _logger.LogInformation(allTasks.ToString());
 
             return new ProcessStateDto()
@@ -48,7 +44,6 @@ namespace poc.Services
 
         public async Task CompleteUserTaskWithNoVariables(String processInstanceId)
         {
-            // await SetProcessVariables(processInstanceId);
             var userTaskId = getActiveUserTaskId(processInstanceId);
             await _camundaClient.UserTasks[userTaskId].Complete(new CompleteTask()); 
         }
