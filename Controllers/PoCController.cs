@@ -27,6 +27,20 @@ namespace poc.Controllers
             return Ok(response);
         }
 
+        [HttpPost("/startLicenseProcess/{businessKey}", Name = "Start license process")]
+        public async Task<IActionResult> StartLicensingProcess(String businessKey)
+        {
+            var response = await _camundaService.StartLicensingProcess(businessKey);
+            _logger.LogInformation(response.ToString());
+            return Ok("ok");
+        }
+
+        [HttpPost("/selectLicense/{processInstanceId}", Name = "Select license, fill form, upload docs")]
+        public async void SelectLicense(String processInstanceId)
+        {
+            var response = await _camundaService.SelectLicense(processInstanceId);
+        }
+
         [HttpGet("/healthCheck", Name = "HealthCheck")]
         public ActionResult healthCheck()
         {

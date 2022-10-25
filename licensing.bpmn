@@ -100,7 +100,7 @@
     <bpmn:sequenceFlow id="Flow_0zefxh9" sourceRef="final_reject" targetRef="Event_082sns6" />
     <bpmn:sequenceFlow id="Flow_1ehxm60" sourceRef="final_accept" targetRef="Event_082sns6" />
   </bpmn:process>
-  <bpmn:message id="Message_1umz1sv" name="start" />
+  <bpmn:message id="Message_1umz1sv" name="startProcess" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_16tsung">
       <bpmndi:BPMNShape id="Participant_0n6ydnf_di" bpmnElement="Participant_0n6ydnf" isHorizontal="true">
