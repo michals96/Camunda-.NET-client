@@ -93,14 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Dockerfile" />
+    <None Include="licensing.bpmn" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="calculation.bpmn" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="start-form.html" />
-    <EmbeddedResource Include="result.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
