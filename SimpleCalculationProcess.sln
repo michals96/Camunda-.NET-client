@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculationProcess", "SimpleCalculationProcess.csproj", "{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D1D9F38-2DB9-47FB-BE27-78E981203737}
+	EndGlobalSection
+EndGlobal
