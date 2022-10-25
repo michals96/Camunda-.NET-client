@@ -7,7 +7,6 @@ namespace SimpleCalculationProcess
     [ExternalTaskVariableRequirements("x", "y")]
     class CalculationAdapter : IExternalTaskAdapter
     {
-
         public void Execute(ExternalTask externalTask, ref Dictionary<string, object> resultVariables)
         {
             long x = Convert.ToInt64(externalTask.Variables["x"].Value);
@@ -15,6 +14,5 @@ namespace SimpleCalculationProcess
             long result = x + y;
             resultVariables.Add("result", result);
         }
-
     }
 }
