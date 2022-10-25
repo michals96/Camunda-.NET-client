@@ -17,32 +17,22 @@ namespace poc.Controllers
             _logger = logger;
         }
 
-        [HttpPost(Name = "MoveForward")]
-        public async Task<IActionResult> MoveForward(ProcessStateDto processStateDto)
-        {
-            var response = await _camundaService.Process(processStateDto.Id, processStateDto);
-
-            //return BadRequest(response);
-            
-            return Ok(response);
-        }
-
         [HttpPost("/startLicenseProcess/{businessKey}", Name = "Start license process")]
         public async Task<IActionResult> StartLicensingProcess(String businessKey)
         {
-            var response = await _camundaService.StartLicensingProcess(businessKey);
-            _logger.LogInformation(response.ToString());
-            return Ok("ok");
+            await _camundaService.StartLicensingProcess(businessKey);
+            return Ok(_camundaService.GetInstanceIdByBusinessKey(businessKey));
         }
 
         [HttpPost("/selectLicense/{processInstanceId}", Name = "Select license, fill form, upload docs")]
-        public async void SelectLicense(String processInstanceId)
+        public ActionResult SelectLicense(String processInstanceId)
         {
-            var response = await _camundaService.SelectLicense(processInstanceId);
+            _camundaService.SelectLicense(processInstanceId);
+            return Content("License selected!");
         }
 
         [HttpGet("/healthCheck", Name = "HealthCheck")]
-        public ActionResult healthCheck()
+        public ActionResult HealthCheck()
         {
             return Content("Application is UP!");
         }

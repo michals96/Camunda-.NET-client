@@ -1,6 +1,7 @@
 ﻿using Camunda.Api.Client;
 using Camunda.Api.Client.ExternalTask;
 using Camunda.Api.Client.Message;
+using Camunda.Api.Client.ProcessInstance;
 using Camunda.Api.Client.UserTask;
 using Microsoft.Extensions.Logging;
 using poc.Dtos;
@@ -10,8 +11,9 @@ namespace poc.Services
     public interface ICamundaService
     {
         Task<ProcessStateDto> Process(string processId, ProcessStateDto processStateDto);
-        Task<String> SelectLicense(String processInstanceId);
-        Task<List<CorrelationResult>> StartLicensingProcess(String businessKey);
+        Task SelectLicense(String processInstanceId);
+        Task<String> StartLicensingProcess(String businessKey);
+        String GetInstanceIdByBusinessKey(String businessKey);
     }
     public class CamundaService : ICamundaService
     {
@@ -43,29 +45,44 @@ namespace poc.Services
             };
         }
 
-        public async Task<String> SelectLicense(String processInstanceId)
+        public async Task SelectLicense(String processInstanceId)
         {
-            Task<Camunda.Api.Client.ProcessInstance.ActivityInstanceInfo> task = _camundaClient.ProcessInstances[processInstanceId].GetActivityInstance();
+            ActivityInstanceInfo task = await _camundaClient.ProcessInstances[processInstanceId].GetActivityInstance();
+            _logger.LogInformation(task.Id);
+            TaskQuery taskQuery = new TaskQuery() { Active = true, ProcessInstanceId = processInstanceId };
+            var userTaskId = _camundaClient.UserTasks.Query(taskQuery).List().Result.Last().Id;
+            _logger.LogInformation(userTaskId);
             //Task<Camunda.Api.Client.UserTask.UserTaskInfo> selectLicenseTask= _camundaClient.UserTasks["select_license"].Get();
             //selectLicenseTask.
-            await _camundaClient.UserTasks[task.Id.ToString()].Complete(new CompleteTask());
+            await _camundaClient.UserTasks[userTaskId].Complete(new CompleteTask());
             //CompleteTask completeTask = new CompleteTask();
             //completeTask.SetVariable("accepted", "true");
             //_camundaClient.UserTasks["select_license"].Complete(completeTask);
             //_logger.LogInformation(_camundaClient.UserTasks["select_license"].ToString());
+            
+        }
+
+        public async Task<String> StartLicensingProcess(String businessKey)
+        {
+            
+            var message = new CorrelationMessage() { MessageName = "startProcess", BusinessKey = businessKey, All = true };
+            await _camundaClient.Messages.DeliverMessage(message);
             return "Success";
         }
 
-        public async Task<List<CorrelationResult>> StartLicensingProcess(String businessKey)
+        public String GetInstanceIdByBusinessKey(String businessKey)
         {
-            var message = new CorrelationMessage() { MessageName = "startProcess", BusinessKey = businessKey, All = true };
-            return await _camundaClient.Messages.DeliverMessage(message);
-            // var task1 = _camundaClient.Messages.DeliverMessage(message);
-            // task1.Wait();
-            // var id = task1.Result.First().ProcessInstance.Id;
-            // _logger.LogInformation(id.ToString());
-            // return "ok";
-            //task.First().ProcessInstance.Id;
+            var query = new ProcessInstanceQuery() { BusinessKey = businessKey, Active = true };
+            var processInstanceId = _camundaClient.ProcessInstances.Query(query).List().Result.Last().Id;
+            return processInstanceId.ToString();
+        }
+
+        public String GetInstanceIdInstanceID(String Id)
+        {
+            var query = new ProcessInstanceQuery() { ProcessInstanceIds = new List<string>() { Id }, Active = true };
+            var processInstanceId = _camundaClient.ProcessInstances.Query(query).List().Result.Last().Id;
+            _camundaClient.ProcessInstances[processInstanceId].GetActivityInstance();
+            return processInstanceId.ToString();
         }
     }
 }
