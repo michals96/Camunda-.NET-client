@@ -1,5 +1,6 @@
 import {Box, Button, TextareaAutosize, TextField} from "@mui/material";
 import React, {useState} from "react";
+import {postCamundaEngine} from "../services/post-camunda.engine";
 
 const RequestWindow = (): JSX.Element => {
     const [url, setUrl] = useState<string>('');
@@ -31,7 +32,7 @@ const RequestWindow = (): JSX.Element => {
             />
             <Button variant="contained"
                     onClick={() => {
-                        alert('clicked');
+                        postCamundaEngine(url, body).then(r => alert("Success!"));
                     }}>
                 Send to Camunda
             </Button>
