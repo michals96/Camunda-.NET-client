@@ -34,6 +34,16 @@ Body
 }
 ```
 
+or
+
+```
+{"variables":
+    {"accepted": {"value": true},
+    "rejected": {"value": false},
+    "moreDetails": {"value": false}}
+}
+```
+
 X. Get Activity Instance (no-body)
 
 URL

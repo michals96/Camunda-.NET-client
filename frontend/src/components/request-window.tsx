@@ -27,16 +27,16 @@ const RequestWindow = (): JSX.Element => {
     >
         <h1>HTTP - Camunda engine</h1>
         <TextField size="medium" label="Camunda REST Api URL" id="url_input" onChange={handleUrlChange}
-                   style={{width: 300}}/>
+                   style={{width: 500}}/>
         <TextareaAutosize
             maxRows={4}
             aria-label="maximum height"
             placeholder="Request body : Camunda REST Api"
-            style={{width: 300, height: 400}}
+            style={{width: 500, height: 400}}
             onChange={handleBodyChange}
         />
         <Button variant="contained"
-                style={{width: 300}}
+                style={{width: 500}}
                 onClick={() => {
                     postCamundaEngine(url, body).then(r => alert("Success!"));
                 }}>
