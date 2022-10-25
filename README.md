@@ -11,6 +11,7 @@
 * `docker logs -f container_id` to see backend logs
 * `docker-compose down` to stop and remove containers with networks\
 * `docker-compose pull` to update images on change
+* `docker exec -it container_id /bin/bash` to get into container
 # REQUESTS
 
 1. Start process
