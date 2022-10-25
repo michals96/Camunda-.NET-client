@@ -11,6 +11,8 @@
 **3. Run application**
 - go to `localhost:3000`
 
+**Note:** *Don't forget to deploy the process first!*
+
 ### Useful commands
 * `docker logs -f container_id` to see backend logs
 * `docker-compose down` to stop and remove containers with networks\

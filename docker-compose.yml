@@ -17,5 +17,3 @@ services:
       - "5259:5259"
     depends_on:
       - camunda
-
-
