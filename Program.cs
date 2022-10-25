@@ -1,34 +1,37 @@
-using Camunda.Api.Client;
-using poc.Services;
+﻿using System;
+using CamundaClient;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ICamundaService, CamundaService>();
-builder.Services.AddSingleton<CamundaClient>(sp =>
+namespace SimpleCalculationProcess
 {
-    HttpClient httpClient = new HttpClient();
-    httpClient.BaseAddress = new Uri("http://localhost:8080/engine-rest");
-    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic ZGVtbzpkZW1v");
-    CamundaClient camunda = CamundaClient.Create(httpClient);
-    return camunda;
-});
-var app = builder.Build();
+    class Program
+    {
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        private static string logo =
+                "   ____                                _         ____  ____  __  __ \n" +
+                "  / ___|__ _ _ __ ___  _   _ _ __   __| | __ _  | __ )|  _ \\|  \\/  |\n" +
+                " | |   / _` | '_ ` _ \\| | | | '_ \\ / _` |/ _` | |  _ \\| |_) | |\\/| |\n" +
+                " | |__| (_| | | | | | | |_| | | | | (_| | (_| | | |_) |  __/| |  | |\n" +
+                "  \\____\\__,_|_| |_| |_|\\__,_|_| |_|\\__,_|\\__,_| |____/|_|   |_|  |_|\n";
+
+        private static void Main(string[] args)
+        {
+            
+            Console.WriteLine( logo + "\n\n" + "Deploying models and start External Task Workers.\n\nPRESS ANY KEY TO STOP WORKERS.\n\n");
+
+            CamundaEngineClient camunda = new CamundaEngineClient();            
+            camunda.Startup(); // Deploys all models to Camunda and Start all found ExternalTask-Workers
+            Console.ReadLine(); // wait for ANY KEY
+            camunda.Shutdown(); // Stop Task Workers
+        }
+
+        private static void writeTasksToConsole(CamundaEngineClient camunda)
+        {
+            var tasks = camunda.HumanTaskService.LoadTasks();
+            foreach (var task in tasks)
+            {
+                Console.WriteLine(task.Name);
+            }
+        }
+
+    }
 }
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
