@@ -8,7 +8,9 @@
 
 3. Go to `localhost:300`
 
-
+* `docker logs -f container_id` to see backend logs
+* `docker-compose down` to stop and remove containers with networks\
+* `docker-compose pull` to update images on change
 # REQUESTS
 
 1. Start process
