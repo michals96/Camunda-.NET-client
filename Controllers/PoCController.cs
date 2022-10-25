@@ -27,8 +27,22 @@ namespace poc.Controllers
         [HttpPost("/selectLicense/{processInstanceId}", Name = "Select license, fill form, upload docs")]
         public ActionResult SelectLicense(String processInstanceId)
         {
-            _camundaService.SelectLicense(processInstanceId);
+            _camundaService.CompleteUserTaskWithNoVariables(processInstanceId);
             return Content("License selected!");
+        }
+
+        [HttpPost("/assignToSupport/{processInstanceId}", Name = "Assign license request to support team")]
+        public ActionResult AssignToSupport(String processInstanceId)
+        {
+            _camundaService.CompleteUserTaskWithNoVariables(processInstanceId);
+            return Content("Assigned to support!");
+        }
+
+        [HttpPost("/validateRequest/{processInstanceId}", Name = "Support validates request")]
+        public ActionResult ValidateRequest(String processInstanceId)
+        {
+            _camundaService.CompleteUserTaskWithVariables(processInstanceId);
+            return Content("Request validated!");
         }
 
         [HttpGet("/healthCheck", Name = "HealthCheck")]
