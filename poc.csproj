@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Komsa.Camunda.Api.Client" Version="2.7.0" />
+    <None Remove="licensing.bpmn" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="licensing.bpmn" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BerndRuecker.Sample.CamundaClient" Version="0.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

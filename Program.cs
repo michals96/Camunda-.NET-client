@@ -1,5 +1,5 @@
-using Camunda.Api.Client;
-using poc.Services;
+using CamundaClient;
+using poc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,15 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ICamundaService, CamundaService>();
-builder.Services.AddSingleton<CamundaClient>(sp =>
-{
-    HttpClient httpClient = new HttpClient();
-    httpClient.BaseAddress = new Uri("http://localhost:8080/engine-rest");
-    httpClient.DefaultRequestHeaders.Add("Authorization", "Basic ZGVtbzpkZW1v");
-    CamundaClient camunda = CamundaClient.Create(httpClient);
-    return camunda;
-});
+builder.Services.AddHostedService<CamundaShowcase>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
