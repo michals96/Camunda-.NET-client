@@ -17,29 +17,32 @@ const RequestWindow = (): JSX.Element => {
     };
 
     return (<Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': {m: 1, width: '50ch'},
-            }}
-            noValidate
-            autoComplete="off"
-            className={styles.container}
-        >
-            <TextField size="medium" label="Camunda REST Api URL" id="url_input" onChange={handleUrlChange}/>
-            <TextareaAutosize
-                maxRows={4}
-                aria-label="maximum height"
-                placeholder="Request body : Camunda REST Api"
-                style={{width: 400, height: 500}}
-                onChange={handleBodyChange}
-            />
-            <Button variant="contained"
-                    onClick={() => {
-                        postCamundaEngine(url, body).then(r => alert("Success!"));
-                    }}>
-                Send to Camunda
-            </Button>
-        </Box>)
+        component="form"
+        sx={{
+            '& .MuiTextField-root': {width: '50ch'},
+        }}
+        noValidate
+        autoComplete="off"
+        className={styles.container}
+    >
+        <h1>HTTP request to Camunda engine</h1>
+        <TextField size="medium" label="Camunda REST Api URL" id="url_input" onChange={handleUrlChange}
+                   style={{width: 400}}/>
+        <TextareaAutosize
+            maxRows={4}
+            aria-label="maximum height"
+            placeholder="Request body : Camunda REST Api"
+            style={{width: 400, height: 500}}
+            onChange={handleBodyChange}
+        />
+        <Button variant="contained"
+                style={{width: 400}}
+                onClick={() => {
+                    postCamundaEngine(url, body).then(r => alert("Success!"));
+                }}>
+            Send to Camunda
+        </Button>
+    </Box>)
 }
 
 export default RequestWindow;
