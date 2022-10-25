@@ -1,7 +1,7 @@
 ﻿using CamundaClient.Dto;
 using CamundaClient.Worker;
 
-namespace SimpleCalculationProcess
+namespace poc.workers
 {
     [ExternalTaskTopic("calculate")]
     [ExternalTaskVariableRequirements("x", "y")]
