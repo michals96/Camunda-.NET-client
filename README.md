@@ -1,4 +1,4 @@
-# HOW TO RUN
+## HOW TO RUN
 
 1. Run `docker-compose up -d`
 2. Start browser in *NO-CORS* mode
@@ -6,15 +6,17 @@
 * gchrome on windows it is `chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security`
 * gchrome onlinux it is `google-chrome --disable-web-security`
 
-3. Go to `localhost:300`
+3. Go to `localhost:3000`
 
 * `docker logs -f container_id` to see backend logs
 * `docker-compose down` to stop and remove containers with networks\
 * `docker-compose pull` to update images on change
 * `docker exec -it container_id /bin/bash` to get into container
-# REQUESTS
 
-1. Start process
+![Alt text](./licensing-process.PNG?raw=true "Licensing process")
+## REQUESTS
+
+**1. Start process**
 
 URL
 `POST - http://localhost:8080/engine-rest/process-definition/key/licensing-process/start`
@@ -24,7 +26,7 @@ Body
 {}
 ```
 
-2. Complete user task with no variables
+**2. Complete user task with no variables**
 
 URL
 `http://localhost:8080/engine-rest/task/{id}/complete`
@@ -34,7 +36,7 @@ Body
 {}
 ```
 
-3. Complete user task with variables
+**3. Complete user task with variables**
 
 URL
 `http://localhost:8080/engine-rest/task/{id}/complete`
@@ -65,7 +67,7 @@ URL
 
 
 
-# ABBREVIATIONS
+### ABBREVIATIONS
 
 Run browser with disabled CORS mode
 
