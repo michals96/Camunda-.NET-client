@@ -19,24 +19,24 @@ const RequestWindow = (): JSX.Element => {
     return (<Box
         component="form"
         sx={{
-            '& .MuiTextField-root': {width: '50ch'},
+            '& .MuiTextField-root': {width: '40ch'},
         }}
         noValidate
         autoComplete="off"
         className={styles.container}
     >
-        <h1>HTTP request to Camunda engine</h1>
+        <h1>HTTP - Camunda engine</h1>
         <TextField size="medium" label="Camunda REST Api URL" id="url_input" onChange={handleUrlChange}
-                   style={{width: 400}}/>
+                   style={{width: 300}}/>
         <TextareaAutosize
             maxRows={4}
             aria-label="maximum height"
             placeholder="Request body : Camunda REST Api"
-            style={{width: 400, height: 500}}
+            style={{width: 300, height: 400}}
             onChange={handleBodyChange}
         />
         <Button variant="contained"
-                style={{width: 400}}
+                style={{width: 300}}
                 onClick={() => {
                     postCamundaEngine(url, body).then(r => alert("Success!"));
                 }}>
