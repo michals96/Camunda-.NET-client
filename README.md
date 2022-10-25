@@ -3,12 +3,41 @@
 1. Start process
 
 URL
-`http://localhost:8080/engine-rest/process-definition/key/licensing-process/start`
+`POST - http://localhost:8080/engine-rest/process-definition/key/licensing-process/start`
 
 Body
 ```
 {}
 ```
+
+2. Complete user task with no variables
+
+URL
+`http://localhost:8080/engine-rest/task/{id}/complete`
+
+Body
+```
+{}
+```
+
+3. Complete user task with variables
+
+URL
+`http://localhost:8080/engine-rest/task/{id}/complete`
+
+Body
+```
+{"variables":
+    {"aVariable": {"value": "aStringValue"},
+    "anotherVariable": {"value": 42},
+    "aThirdVariable": {"value": true}}
+}
+```
+
+X. Get Activity Instance (no-body)
+
+URL
+`GET - http://localhost:8080/engine-rest/process-instance/{id}/activity-instances`
 
 
 

@@ -14,7 +14,7 @@ namespace poc
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            camunda.Startup();
+            camunda.StartWorkers();
             return Task.CompletedTask;
         }
 
