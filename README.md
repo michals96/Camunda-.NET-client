@@ -1,18 +1,23 @@
 ## HOW TO RUN
 
-1. Run `docker-compose up -d`
-2. Start browser in *NO-CORS* mode
+**1. Start application**
+- run `docker-compose up -d`
 
-* gchrome on windows it is `chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security`
-* gchrome onlinux it is `google-chrome --disable-web-security`
+**2. Start browser in NO-CORS mode**
 
-3. Go to `localhost:3000`
+- gchrome on windows it is `chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security`
+- gchrome onlinux it is `google-chrome --disable-web-security`
 
+**3. Run application**
+- go to `localhost:3000`
+
+### Useful commands
 * `docker logs -f container_id` to see backend logs
 * `docker-compose down` to stop and remove containers with networks\
 * `docker-compose pull` to update images on change
 * `docker exec -it container_id /bin/bash` to get into container
 
+### Licensing process
 ![Alt text](./licensing-process.PNG?raw=true "Licensing process")
 ## REQUESTS
 
