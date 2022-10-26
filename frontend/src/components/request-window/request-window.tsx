@@ -1,6 +1,6 @@
 import {Box, Button, TextareaAutosize, TextField} from "@mui/material";
 import React, {useState} from "react";
-import {postCamundaEngine} from "../services/post-camunda.engine";
+import {postCamundaEngine} from "../../services/post-camunda.engine";
 
 import styles from "./request-window.module.scss";
 
@@ -42,7 +42,7 @@ const RequestWindow = (): JSX.Element => {
                 }}>
             Send to Camunda
         </Button>
-    </Box>)
+    </Box>);
 }
 
 export default RequestWindow;
