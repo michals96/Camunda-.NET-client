@@ -4,7 +4,7 @@ namespace poc
 {
     public class CamundaService : IHostedService
     {
-        public static string CAMUNDA_URL = "http://host.docker.internal:8080/engine-rest/engine/default/";
+        public static string CAMUNDA_URL = "http://localhost:8080/engine-rest/engine/default/";
 
         private readonly CamundaEngineClient camunda;
 
